@@ -4,8 +4,6 @@ public class Pizza {
 	static final double VALOR_INGREDIENTE;
 
     static int pizzasVendidas;
-    final String descricao;
-
     int quantidadeIngredientes;
 
     static{
@@ -15,20 +13,19 @@ public class Pizza {
         pizzasVendidas = 0;
     }
 
-    void init(int adicionais) {
+     void init(int adicionais) {
 		 adicionarIngredientes(adicionais);
          pizzasVendidas++;
     }
 
 	public Pizza() {
 		init(0);
-        descricao = "Pizza sem adicionais";
+
 	}
 
 	public Pizza(int adicionais) {
 		init(adicionais);
-        descricao = "Pizza com "+adicionais+" ingredientes";
-	}
+    }
 
 	public double calcularValorFinal() {
 		return PRECO_BASE + calcularValorAdicionais();
@@ -41,7 +38,7 @@ public class Pizza {
 	public String gerarCupom() {
 		String cupom = "Xulambs Pizza!!!\n";
         
-        cupom += String.format("Pizza com %d ingredientes\n",      quantidadeIngredientes);
+        cupom += String.format("Pizza com %d ingredientes\n",quantidadeIngredientes);
 
         cupom += String.format("\tPreço base: R$ %.2f\n", PRECO_BASE);
         cupom += String.format("\tAdicionais: R$ %.2f\n", calcularValorAdicionais());
