@@ -23,15 +23,17 @@ public class XulambsApp {
 
     private int exibirMenu() {
         cabecalho();
-        IO.println("1 - Comprar pizza");
-        IO.println("2 - Ver todas as pizzas");
+        IO.println("1 - Abrir pedido");
+        IO.println("2 - Alterar pedido");
+        IO.println("3 -Relatório pedido");
+        IO.println("4 - Encerrar pedido");
         IO.println("0 - Sair");
         return Integer.parseInt(IO.readln("Digite sua opção: "));
     }
 
 
 
-    void comprarPizza(){
+    Pizza comprarPizza(){
         cabecalho();
         int adicionais = 
             Integer.parseInt(IO.readln("Quantos ingredientes? "));
@@ -41,6 +43,7 @@ public class XulambsApp {
 
         mostrarNota(nova);
         listaPizzas.add(nova);
+        return nova;
     }
 
     void mostrarNota(Pizza pizza){
@@ -55,6 +58,20 @@ public class XulambsApp {
             mostrarNota(pizza);
         }
     }
+    
+    void AbrirPedido(){
+        String querMais = "n";
+        Pedido novoPedido = new Pedido();
+        do{
+            Pizza novaPizza= comprarPizza();
+            novoPedido.adicionarPizza(novaPizza);
+            querMais = IO.readln("Quer mais pizza");
+        }while(querMais.equals("s"));
+    }
+    void alterarPedido(){
+        cabecalho();
+        int idPedido = Integer.parseInt(IO.readln("Nº do pedido: "));
+    }
 
     void main(){
         int opcao;
@@ -62,8 +79,8 @@ public class XulambsApp {
         do {
             opcao = exibirMenu();
             switch (opcao) {
-                case 1 -> comprarPizza();
-                case 2 -> mostrarPizzas();
+                case 1 -> AbrirPedido();
+                case 2 -> alterarPedido();
                 case 0 -> IO.println("Encerrando!");
                 default -> IO.println("Opção inválida");
             }   
